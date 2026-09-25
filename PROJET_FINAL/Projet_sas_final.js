@@ -156,6 +156,7 @@ switch (afficheItsChoose){
 }
 
 //  affiche and switch end sssssssssssssssssssssssssssssssssssssssssssssssssssssssss
+
 //  ajoute function start jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
 
 function ajouteCandidat(){
@@ -198,10 +199,84 @@ function ajouteCandidat(){
     if (candidatPourAjouté){
         console.log("        Candidat a été ajouté avec succès.")
     }
+    console.log(" ")
     
 }
 
 // jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+
+
+// AjoutePlusieurs function pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp
+function ajoutePlusieur(){
+    let nombreDeCandidatPourAjouter = parseInt(prompt("Combien de candidat voulez vous de les ajoute : ")) 
+    for (let i= 1; i<= nombreDeCandidatPourAjouter ; i++){
+        ajouteCandidat()
+
+    }
+}
+// ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp
+// Voter Function -------------------------------------------------------------------------
+function voterPourCandidat(){
+    console.log(`
+        ==================================================
+                        ESPACE DE VOTE
+
+    `)
+    console.log(`
+        Bonjour !
+        s'il vous plait , suivre les instructions suivantes . 
+        ---------------------------------------------------
+        Les candidats disponibles: 
+    `)
+    for(let cinName of candidats){
+        console.log("- ", cinName.nom ," ", cinName.prenom , "; CIN : ", cinName.cin)
+    }
+    
+    console.log("        ---------------------------------------------------")
+    console.log(" ")
+
+
+    let cinDeVoter = prompt("             Entre votre CIN: ")
+    for(let i =1; i<= 1; i++){
+        let verifierCinVoteCount = 0
+        for (let u = 0; u< candidats.length ; u++){
+            for(let j =0 ; j<= candidats[u].electeurs.length; j++ ){
+                if(cinDeVoter === candidats[u].electeurs[j] ){
+                    console.log(` 
+                        Vous avez déja voter , 
+     et vous n'avez pas le droit de modifier votre vote ni de voter à nouveau.
+                        `)
+                    verifierCinVoteCount ++
+                }
+            }
+        } 
+        if (verifierCinVoteCount >= 1){
+            break;
+        }
+        // let cinDeCandidatpourLeVoter = prompt("Entrer CIN de candidat: ")
+        while(true){
+             let cinDeCandidatpourLeVoter = prompt("             Entrer CIN de candidat: ")
+             let trouverCandidatVote = false
+             for(let i =0; i< candidats.length; i++){
+    
+                if (cinDeCandidatpourLeVoter == candidats[i].cin ){
+                     candidats[i].electeurs.push(cinDeVoter)
+                     console.log("votre vote a été effectuer avec succès .")
+                     trouverCandidatVote = true
+                }
+
+             }
+             if (trouverCandidatVote ){
+                 break
+             }else{
+                 console.log("ni candidat trouvé avec ce CIN ;")
+             }
+        }
+        
+    }
+}
+// -------------------------------------------------------------------------------------
+
 
 //  la fonction du front  rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
 function front(){

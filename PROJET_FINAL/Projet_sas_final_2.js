@@ -59,49 +59,64 @@ for(let i =0 ; i < candidats.length ; i++){
     candidats[i].nombresVotes = vote
     }
 // -------------------------------------------------------------------------------------------------------------------
+function voterPourCandidat(){
+    console.log(`
+        ==================================================
+                        ESPACE DE VOTE
 
-// Ajoute Function
-function ajouteCandidat(){
-    console.log(" ")
-    console.log("       Merci d'entrer les informations de candidat demandés ;")
-    console.log(" ")
-    let candidatPourAjouté = {}
-
-    for(let i =1 ; i<= 1 ; i++){
-        let countCandidatDéjaTrouvé = 0
-        let cinNewCandidat = prompt("   CIN: ")
-        //  vérifier est ce que le Candidat est Déja Trouvé
-         for(let cnd of candidats){
-             if (cnd.cin === cinNewCandidat) {
-                countCandidatDéjaTrouvé ++
-             }
-         }
-         if (countCandidatDéjaTrouvé >= 1){
-            console.log("     Ce candidat est déja trouvé .")
-            break;
-         }  
-        //  vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-
-         candidatPourAjouté.cin = cinNewCandidat  
-         candidatPourAjouté.nom = prompt("   Nom : ")
-         candidatPourAjouté.prenom = prompt("   Prénom : ")
-         candidatPourAjouté.partiPolitique = prompt("   Parti Politique : ")
-         if (candidatPourAjouté.partiPolitique === ""){
-            candidatPourAjouté.partiPolitique = "Independant"
-         }
-         candidatPourAjouté.age = parseInt(prompt("   Age : "))
-         while(candidatPourAjouté.age < 0){
-            console.log("Invalide age")
-           candidatPourAjouté.age = parseInt(prompt("   Age : ")) 
-         }
-         candidatPourAjouté.electeurs = []
-         candidats.push(candidatPourAjouté)
-    }
-    console.log(" ")
-    if (candidatPourAjouté){
-        console.log("        Candidat a été ajouté avec succès.")
+    `)
+    console.log(`
+        Bonjour !
+        s'il vous plait , suivre les instructions suivantes . 
+        ---------------------------------------------------
+        Les candidats disponibles: 
+    `)
+    for(let cinName of candidats){
+        console.log("- ", cinName.nom ," ", cinName.prenom , "; CIN : ", cinName.cin)
     }
     
+    console.log("        ---------------------------------------------------")
+
+
+
+    let cinDeVoter = prompt("             Entre votre CIN: ")
+    for(let i =1; i<= 1; i++){
+        let verifierCinVoteCount = 0
+        for (let u = 0; u< candidats.length ; u++){
+            for(let j =0 ; j<= candidats[u].electeurs.length; j++ ){
+                if(cinDeVoter === candidats[u].electeurs[j] ){
+                    console.log(` 
+                        Vous avez déja voter , 
+     et vous n'avez pas le droit de modifier votre vote ni de voter à nouveau.
+                        `)
+                    verifierCinVoteCount ++
+                }
+            }
+        } 
+        if (verifierCinVoteCount >= 1){
+            break;
+        }
+        // let cinDeCandidatpourLeVoter = prompt("Entrer CIN de candidat: ")
+        while(true){
+             let cinDeCandidatpourLeVoter = prompt("             Entrer CIN de candidat: ")
+             let trouverCandidatVote = false
+             for(let i =0; i< candidats.length; i++){
+    
+                if (cinDeCandidatpourLeVoter == candidats[i].cin ){
+                     candidats[i].electeurs.push(cinDeVoter)
+                     console.log("votre vote a été effectuer avec succès .")
+                     trouverCandidatVote = true
+                }
+
+             }
+             if (trouverCandidatVote ){
+                 break
+             }else{
+                 console.log("ni candidat trouvé avec ce CIN ;")
+             }
+        }
+        
+    }
 }
-ajouteCandidat()
+voterPourCandidat()
 
