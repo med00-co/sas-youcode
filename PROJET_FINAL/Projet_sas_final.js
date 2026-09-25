@@ -215,6 +215,7 @@ function ajoutePlusieur(){
     }
 }
 // ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp
+
 // Voter Function -------------------------------------------------------------------------
 function voterPourCandidat(){
     console.log(`
@@ -223,7 +224,7 @@ function voterPourCandidat(){
 
     `)
     console.log(`
-        Bonjour !
+        Bienvenue à l'espace voter !
         s'il vous plait , suivre les instructions suivantes . 
         ---------------------------------------------------
         Les candidats disponibles: 
@@ -276,8 +277,102 @@ function voterPourCandidat(){
     }
 }
 // -------------------------------------------------------------------------------------
+// Modifier les informations d'un candidat function -----------------------------------------------
+function modifierInformationCandidat(){
+    console.log(`
+        ==================================================
+                 MODIFICATION DES INFORMATIONS
+                        -- CANDIDAT --
+
+    `)
+    console.log(`
+        Bienvenue! 
+          les commandes:
+           1 - Modifier le parti politique d'un candidat
+           2 - Modifier l'âge d'un candidat
+
+    `)
+    let chooseModifier = parseInt(prompt("   Votre choix: "))
+    switch (chooseModifier){
 
 
+
+        case 1:
+            let  cinCandidatPourModifier = prompt("Taper CIN du candidat : ")
+            let ModifieEtTrouve = false
+            for(let candide of candidats ){
+                if (cinCandidatPourModifier === candide.cin){
+                    console.log(" ")
+                    console.log("  candidat trouvé --")
+                    console.log(`
+                        CIN : ${candide.cin}
+                        Nom : ${candide.nom}
+                        Prénom : ${candide.prenom}
+                        Parti Politique : ${candide.partiPolitique}
+                        Age : ${candide.age}
+                    `)
+                    let partiPolModifie = prompt("Entrer la nouvelle parti politique: ")
+                    candide.partiPolitique = partiPolModifie.trim()
+                    ModifieEtTrouve = true
+                }
+            }
+            if (ModifieEtTrouve === false ){
+                console.log("  Candidat introuvable")
+            }
+
+            break;
+
+
+
+        case 2:
+            let  cinCandidatPourModifier2 = prompt("Taper CIN du candidat : ")
+            let trouveModifie = false
+            for (let candi of candidats){
+                if(cinCandidatPourModifier2 === candi.cin){
+                    console.log(" ")
+                    console.log("candidat trouvé --")
+                    console.log(`
+                        CIN : ${candi.cin}
+                        Nom : ${candi.nom}
+                        Prénom : ${candi.prenom}
+                        Parti Politique : ${candi.partiPolitique}
+                        Age : ${candi.age}
+                    `)
+                    console.log(" ")
+                    while(true){
+                      var newAge = parseInt(prompt("     Entrer le nouveau age: "))
+                      if (newAge < 0){
+                        console.log("    Invalide age!")
+                        newAge = parseInt(prompt("     Entrer le nouveau age: "))
+                      }else{
+                        break;
+                      }
+                    }
+                    candi.age = newAge
+                    console.log("Age a été modifié avec succès. ")
+                    trouveModifie = true
+                    
+                }
+                
+            }
+            if (trouveModifie === false){
+                console.log("    Candidat introuvable !")
+            }
+
+            break;
+
+
+        default: 
+           console.log("            Choix incorrecte! ")
+    }
+}
+
+modifierInformationCandidat()
+// --------------------------------------------------------------- Modifier function end ------------------------------------------------
+// supprimer function --------------------------------------------------------------------------------------------------------------------
+function supprimerCandidat() {
+    
+}
 //  la fonction du front  rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
 function front(){
 console.log(`
@@ -329,4 +424,4 @@ switch(choose){
         console.log("Votre séléction est introuvable! ")
     
 }
-// ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; require end ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+// ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; require functions end ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

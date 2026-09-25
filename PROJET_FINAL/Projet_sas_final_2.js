@@ -59,64 +59,40 @@ for(let i =0 ; i < candidats.length ; i++){
     candidats[i].nombresVotes = vote
     }
 // -------------------------------------------------------------------------------------------------------------------
-function voterPourCandidat(){
+function supprimerCandidat() {
+  for(let o = 1; o<= 1; o++){
     console.log(`
         ==================================================
-                        ESPACE DE VOTE
-
+                   SUPPRIMER DES CANDIDATS
     `)
     console.log(`
-        Bonjour !
-        s'il vous plait , suivre les instructions suivantes . 
-        ---------------------------------------------------
-        Les candidats disponibles: 
+     s'il vous plait , il faut d'etre bien concentré dans ce case là;
     `)
-    for(let cinName of candidats){
-        console.log("- ", cinName.nom ," ", cinName.prenom , "; CIN : ", cinName.cin)
-    }
-    
-    console.log("        ---------------------------------------------------")
-
-
-
-    let cinDeVoter = prompt("             Entre votre CIN: ")
-    for(let i =1; i<= 1; i++){
-        let verifierCinVoteCount = 0
-        for (let u = 0; u< candidats.length ; u++){
-            for(let j =0 ; j<= candidats[u].electeurs.length; j++ ){
-                if(cinDeVoter === candidats[u].electeurs[j] ){
-                    console.log(` 
-                        Vous avez déja voter , 
-     et vous n'avez pas le droit de modifier votre vote ni de voter à nouveau.
-                        `)
-                    verifierCinVoteCount ++
-                }
+    console.log(" ")
+    let annule = true
+    let supp = false
+    let candidatPourSuprimer = prompt("    Entrer CIN du candidat souhaité pour le supprimer : ")
+    for (let q = 0; q < candidats.length ; q++ ){
+        if (candidatPourSuprimer === candidats[q].cin){
+            let verifierDeSupprimer = parseInt(prompt("     étez-vous sùr ?  (1- Oui / 2- Non)  :  "))
+            if (verifierDeSupprimer == 1){
+                candidats[q] = undefined
+                console.log("  Candidat a été supprimé avec succès .")
+                supp = true
+                annule = false
+            }else{
+                console.log("  la suppression a été annulé .")
+                break;
             }
-        } 
-        if (verifierCinVoteCount >= 1){
-            break;
         }
-        // let cinDeCandidatpourLeVoter = prompt("Entrer CIN de candidat: ")
-        while(true){
-             let cinDeCandidatpourLeVoter = prompt("             Entrer CIN de candidat: ")
-             let trouverCandidatVote = false
-             for(let i =0; i< candidats.length; i++){
-    
-                if (cinDeCandidatpourLeVoter == candidats[i].cin ){
-                     candidats[i].electeurs.push(cinDeVoter)
-                     console.log("votre vote a été effectuer avec succès .")
-                     trouverCandidatVote = true
-                }
-
-             }
-             if (trouverCandidatVote ){
-                 break
-             }else{
-                 console.log("ni candidat trouvé avec ce CIN ;")
-             }
-        }
-        
     }
+    if (annule === true){
+        break;
+    }
+    if (supp === false){
+        console.log("  Ce Candidat n'existe pas .")
+    }
+  }
 }
-voterPourCandidat()
-
+supprimerCandidat()
+console.log(candidats)
