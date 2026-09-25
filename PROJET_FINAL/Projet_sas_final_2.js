@@ -58,97 +58,50 @@ for(let i =0 ; i < candidats.length ; i++){
     votes.push(vote)
     candidats[i].nombresVotes = vote
     }
+// -------------------------------------------------------------------------------------------------------------------
 
-// function of affiche
-function afficheCandidat(){
-    console.log(`
-      ========================================================
-                     Afficher les candidats
+// Ajoute Function
+function ajouteCandidat(){
+    console.log(" ")
+    console.log("       Merci d'entrer les informations de candidat demandés ;")
+    console.log(" ")
+    let candidatPourAjouté = {}
 
-`)
-    console.log(`
-          1 - Affichage simple 
-          2 - Tri par nombres de votes
-          3 - Filtrer par un parti politique spécifique 
-`)
-    //  switch starts     ssssssssssssssssssssssssssssssssssssssssss
-let afficheItsChoose = parseInt(prompt("Votre choix: "))
-switch (afficheItsChoose){
+    for(let i =1 ; i<= 1 ; i++){
+        let countCandidatDéjaTrouvé = 0
+        let cinNewCandidat = prompt("   CIN: ")
+        //  vérifier est ce que le Candidat est Déja Trouvé
+         for(let cnd of candidats){
+             if (cnd.cin === cinNewCandidat) {
+                countCandidatDéjaTrouvé ++
+             }
+         }
+         if (countCandidatDéjaTrouvé >= 1){
+            console.log("     Ce candidat est déja trouvé .")
+            break;
+         }  
+        //  vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+
+         candidatPourAjouté.cin = cinNewCandidat  
+         candidatPourAjouté.nom = prompt("   Nom : ")
+         candidatPourAjouté.prenom = prompt("   Prénom : ")
+         candidatPourAjouté.partiPolitique = prompt("   Parti Politique : ")
+         if (candidatPourAjouté.partiPolitique === ""){
+            candidatPourAjouté.partiPolitique = "Independant"
+         }
+         candidatPourAjouté.age = parseInt(prompt("   Age : "))
+         while(candidatPourAjouté.age < 0){
+            console.log("Invalide age")
+           candidatPourAjouté.age = parseInt(prompt("   Age : ")) 
+         }
+         candidatPourAjouté.electeurs = []
+         candidats.push(candidatPourAjouté)
+    }
+    console.log(" ")
+    if (candidatPourAjouté){
+        console.log("        Candidat a été ajouté avec succès.")
+    }
     
-    
-    case 1:
-        for (let candidat of candidats){
-            console.log(`
-                ----------------------------------------
-                CIN : ${candidat.cin}
-                Nom : ${candidat.nom}
-                Prénom: ${candidat.prenom}
-                Parti Politique: ${candidat.partiPolitique}
-                Age : ${candidat.age}
-                Nombres de votes: ${candidat.nombresVotes}
-            `)
-        }
-        break;
-
-
-    case 2:
-        for (let u = 0; u< candidats.length ; u++){
-          for (let j = 0; j< candidats.length ; j++){
-            if (votes[j] < votes[j+1] ){
-                let temp = votes[j]
-                votes[j]= votes[j+1]
-                votes[j+1]= temp
-            }
-          }
-        }
-        for (let i=0; i< votes.length ; i++){
-            for (let j =0; j< candidats.length ; j++){
-                if (votes[i] === candidats[j].nombresVotes){
-                    console.log(i+1 , "- " ,
-                        `
-                ----------------------------------------
-                CIN : ${candidats[j].cin}
-                Nom : ${candidats[j].nom}
-                Prénom: ${candidats[j].prenom}
-                Parti Politique: ${candidats[j].partiPolitique}
-                Age : ${candidats[j].age}
-                Nombres de votes: ${candidats[j].nombresVotes}
-            `
-                    )
-                }
-            }
-        }
-        break;
-
-
-    case 3:
-        const partiPolitiqueDemandePourFiltrer = prompt("Entrer Partie politique:  ").trim().toLowerCase()
-
-
-        for (let candit of candidats){
-            if (candit.partiPolitique.toLowerCase() == partiPolitiqueDemandePourFiltrer){
-              console.log(`
-                ----------------------------------------
-                CIN : ${candit.cin}
-                Nom : ${candit.nom}
-                Prénom: ${candit.prenom}
-                Parti Politique: ${candit.partiPolitique}
-                Age : ${candit.age}
-                Nombres de votes: ${candit.nombresVotes}
-
-              `)
-        
-            }else{
-                console.log("           Désolé, La partie politique n'est pas trouvé. ")
-            }
-            
-            
-        }
-        break;
-    default:
-        console.log("              Choix invalide !!")
 }
-}
+ajouteCandidat()
 
-    //  switch end sssssssssssssssssssssssssssssssssssss
-afficheCandidat()

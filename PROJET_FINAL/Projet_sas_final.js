@@ -155,7 +155,53 @@ switch (afficheItsChoose){
 }
 }
 
-    //  affiche and switch end sssssssssssssssssssssssssssssssssssssssssssssssssssssssss
+//  affiche and switch end sssssssssssssssssssssssssssssssssssssssssssssssssssssssss
+//  ajoute function start jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+
+function ajouteCandidat(){
+    console.log(" ")
+    console.log("       Merci d'entrer les informations de candidat demandés ;")
+    console.log(" ")
+    let candidatPourAjouté = {}
+
+    for(let i =1 ; i<= 1 ; i++){
+        let countCandidatDéjaTrouvé = 0
+        let cinNewCandidat = prompt("   CIN: ")
+        //  vérifier est ce que le Candidat est Déja Trouvé
+         for(let cnd of candidats){
+             if (cnd.cin === cinNewCandidat) {
+                countCandidatDéjaTrouvé ++
+             }
+         }
+         if (countCandidatDéjaTrouvé >= 1){
+            console.log("     Ce candidat est déja trouvé .")
+            break;
+         }  
+        //  vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+
+         candidatPourAjouté.cin = cinNewCandidat  
+         candidatPourAjouté.nom = prompt("   Nom : ")
+         candidatPourAjouté.prenom = prompt("   Prénom : ")
+         candidatPourAjouté.partiPolitique = prompt("   Parti Politique : ")
+         if (candidatPourAjouté.partiPolitique === ""){
+            candidatPourAjouté.partiPolitique = "Independant"
+         }
+         candidatPourAjouté.age = parseInt(prompt("   Age : "))
+         while(candidatPourAjouté.age < 0){
+            console.log("Invalide age")
+           candidatPourAjouté.age = parseInt(prompt("   Age : ")) 
+         }
+         candidatPourAjouté.electeurs = []
+         candidats.push(candidatPourAjouté)
+    }
+    console.log(" ")
+    if (candidatPourAjouté){
+        console.log("        Candidat a été ajouté avec succès.")
+    }
+    
+}
+
+// jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
 
 //  la fonction du front  rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
 function front(){
@@ -184,7 +230,7 @@ switch(choose){
        afficheCandidat()
        break;
     case 2:
-       ajoute()
+       ajouteCandidat()
        break;
     case 3:
         ajoutePlusieur()
