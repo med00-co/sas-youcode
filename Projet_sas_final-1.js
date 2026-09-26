@@ -375,6 +375,18 @@ modifierInformationCandidat()
 // --------------------------------------------------------------- Modifier function end ------------------------------------------------
 // supprimer function --------------------------------------------------------------------------------------------------------------------
 function supprimerCandidat() {
+    // function to delete ---------------
+    function supprimer(tab, i) {
+
+    for (i ; i < tab.length; i++) {
+      tab[i] = tab[i + 1]
+    }
+    tab.length -= 1;
+    return(tab)
+    }
+    // ----------------------------------
+
+
   for(let o = 1; o<= 1; o++){
     console.log(`
         ==================================================
@@ -392,7 +404,7 @@ function supprimerCandidat() {
             supp = true
             let verifierDeSupprimer = parseInt(prompt("     étez-vous sùr ?  (1- Oui / 2- Non)  :  "))
             if (verifierDeSupprimer == 1){
-                candidats[q] = undefined
+                supprimer(candidats, q)
                 console.log("  Candidat a été supprimé avec succès .")
                 annule = false
             }else{
@@ -413,10 +425,112 @@ function supprimerCandidat() {
 }
 // ----------------------------------------------------------------------------------------------------
 // Rechercher function ---------------------------------------------------------------------------------------
-rechercherCandidat(){
-    
+function rechercherCandidat(){
+    console.log(`
+        =======================================================
+                      RECHERCHE D'UN CANDIDAT
+    `)
+    console.log(`
+      Bienvenue dans l'espace de recherche;
+        Entrez le nom de candidat que voulez vous de cherche dans 
+           la case de recherche .
+    `)
+
+    let candidatNomRecherché = prompt("   Recherche ( Nom de candidat ) : ").trim().toLowerCase()
+    let chercheTrouve = false
+    for(let candud of candidats){
+        if (candidatNomRecherché === candud.nom.toLowerCase()){
+            console.log("Candidat trouvés .")
+            console.log(`
+                ----------------------------------------
+                CIN : ${candud.cin}
+                Nom : ${candud.nom}
+                Prénom: ${candud.prenom}
+                Age : ${candud.age}
+                Parti Politique: ${candud.partiPolitique}
+                   Nombre de votes: ${candud.nombresVotes}
+            `)
+            chercheTrouve = true
+        }
+    }
+    if (chercheTrouve === false){
+        console.log("     Candidat non Trouvés .")
+    }
+    console.log(" ")
 }
 // -------------------------------------------------------------------------------------------------------------
+// Statistiques functions -----------------------------------------------------------------------------------
+function staitstiqueElection(){
+    //  Nombre total de candidats 
+    let nombreTotalCandidat = candidats.length
+
+    // Nombres total de votes
+    let nombreTotalVote = 0
+    for (cind of candidats ){
+        nombreTotalVote += cind.nombresVotes
+    }
+
+    // Top 3 
+    let firstTop = candidats[0].nombresVotes
+    let firstTopCANDIDAT 
+
+    let secondTop = candidats[0].nombresVotes
+    let secondTopCANDIDAT
+
+    let thirdTop = candidats[0].nombresVotes
+    let thirdTopCANDIDAT
+    for (let cndt of candidats){
+        if (firstTop < cndt.nombresVotes){
+            thirdTop = secondTop
+            thirdTopCANDIDAT = secondTopCANDIDAT
+
+            secondTop = firstTop
+            secondTopCANDIDAT = firstTopCANDIDAT 
+
+            firstTop = cndt.nombresVotes
+            firstTopCANDIDAT = cndt.cin +" ; "  +cndt.nom + " "+ cndt.prenom
+        }
+    }
+    for(let i = 0; i< candidats.length ; i++){
+        if (firstTop !== candidats[i].nombresVotes && secondTop !== candidats[i].nombresVotes && thirdTop < candidats[i].nombresVotes){
+           thirdTop = candidats[i].nombresVotes
+           thirdTopCANDIDAT = candidats[i].cin +" ; "  +candidats[i].nom + " "+ candidats[i].prenom 
+        }
+    }
+    
+    // Nombre de candidat dans chaque parti politique 
+    let partiAvecNombre = {}
+    candidats.forEach(cond =>{
+        
+      if (partiAvecNombre.hasOwnProperty(cond.partiPolitique) ){
+        partiAvecNombre[cond.partiPolitique] ++
+      }else{
+        partiAvecNombre[cond.partiPolitique]= 1
+      }
+    })
+
+    // print the front 
+    console.log(`
+        ==============================================================================
+        =                    STATISTIQUES DE L'ELECTION                              =
+        =                                                                            =
+    `)
+    console.log(`
+           - Nombre total de candidats : ${nombreTotalCandidat}  candidat.
+           - Nombre total de votes     : ${nombreTotalVote}  vote.
+           
+           - Top 3 candidat (par nombre de votes) : 
+                     1 - ${firstTopCANDIDAT}       ${firstTop} votes.
+                     2 - ${secondTopCANDIDAT}      ${secondTop} votes.
+                     3 - ${thirdTopCANDIDAT}       ${thirdTop} votes.
+
+           - Nombre de candidat dans chaque parti politique: `)
+    for (let paraKey in partiAvecNombre){
+            console.log("                ",paraKey , " : ", partiAvecNombre[paraKey])
+    }
+    console.log(" ")
+}
+// ----------------------------------------------------------------------------------------------------------
 //  la fonction du front  rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
 function front(){
 console.log(`
@@ -437,7 +551,7 @@ console.log("        =================================================")
 var choose = parseInt(prompt("Votre séléction : "))
 }
 front()
-// ;;;;;;;;;;;;;;;;;;; Require Functions ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+// ;;;;;;;;;;;;;;;;;;; Require Functions ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 switch(choose){ 
     case 1: 

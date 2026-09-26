@@ -8,10 +8,10 @@ for (let tab of tableau ){
     }
     }
     for (let i = tableau.indexOf(max); i< tableau.length; i++){
-  if (max !== tableau[i]){
-    if (max2 < tableau[i]){
+  if (max !== tableau[i] && max2 < tableau[i]){
+    
       max2 = tableau[i]
-    }
+    
   }
 }
 console.log(tableau)

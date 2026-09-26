@@ -55,55 +55,34 @@ for(let cana of candidats){
     cana.nombresVotes = cana.electeurs.length
     } 
 // -------------------------------------------------------------------------------------
-function supprimerCandidat() {
-    // function to delete ---------------
-    function supprimer(tab, i) {
-
-    for (i ; i < tab.length; i++) {
-      tab[i] = tab[i + 1]
-    }
-    tab.length -= 1;
-    return(tab)
-    }
-    // ----------------------------------
 
 
-  for(let o = 1; o<= 1; o++){
-    console.log(`
-        ==================================================
-                   SUPPRIMER DES CANDIDATS
-    `)
-    console.log(`
-   s'il vous plait , il faut d'etre bien concentré dans ce case là;
-    `)
-    console.log(" ")
-    let annule = true
-    let supp = false
-    let candidatPourSuprimer = prompt("    Entrer CIN du candidat souhaité pour le supprimer : ")
-    for (let q = 0; q < candidats.length ; q++ ){
-        if (candidatPourSuprimer === candidats[q].cin){
-            supp = true
-            let verifierDeSupprimer = parseInt(prompt("     étez-vous sùr ?  (1- Oui / 2- Non)  :  "))
-            if (verifierDeSupprimer == 1){
-                supprimer(candidats, q)
-                console.log("  Candidat a été supprimé avec succès .")
-                annule = false
-            }else{
-                console.log("  la suppression a été annulé .")
-                break;
-            }
-        }
-    }
+let firstTop = candidats[0].nombresVotes
+let firstTopCANDIDAT 
 
-    if (supp === false){
-        console.log("  Ce Candidat n'existe pas .")
-        break;
-    }
-    if (annule === true){
-          
+let secondTop = candidats[0].nombresVotes
+let secondTopCANDIDAT
+
+let thirdTop = candidats[0].nombresVotes
+let thirdTopCANDIDAT
+for (let cndt of candidats){
+    if (firstTop < cndt.nombresVotes){
+        thirdTop = secondTop
+        thirdTopCANDIDAT = secondTopCANDIDAT
+
+        secondTop = firstTop
+        secondTopCANDIDAT = firstTopCANDIDAT 
+
+        firstTop = cndt.nombresVotes
+        firstTopCANDIDAT = cndt.cin +" ; "  +cndt.nom + " "+ cndt.prenom
     }
 }
+for(let i = 0; i< candidats.length ; i++){
+    if (firstTop !== candidats[i].nombresVotes && secondTop !== candidats[i].nombresVotes && thirdTop < candidats[i].nombresVotes){
+       thirdTop = candidats[i].nombresVotes
+       thirdTopCANDIDAT = candidats[i].cin +" ; "  +candidats[i].nom + " "+ candidats[i].prenom
+    }
 }
-
-supprimerCandidat()
-console.log(candidats)
+console.log("1 - ",firstTop , " ", firstTopCANDIDAT)
+console.log("2- ",secondTop, " ", secondTopCANDIDAT)
+console.log("3- ", thirdTop, " ", thirdTopCANDIDAT)    

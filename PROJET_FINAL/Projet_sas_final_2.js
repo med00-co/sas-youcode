@@ -50,51 +50,57 @@ const candidats = [
     },
 ]
 
-
-    //   calcul le nombre de votes
-let votes = []
-for(let i =0 ; i < candidats.length ; i++){
-    let vote = candidats[i].electeurs.length
-    votes.push(vote)
-    candidats[i].nombresVotes = vote
-    }
 // -------------------------------------------------------------------------------------------------------------------
-function supprimerCandidat() {
-  for(let o = 1; o<= 1; o++){
-    console.log(`
-        ==================================================
-                   SUPPRIMER DES CANDIDATS
-    `)
-    console.log(`
-   s'il vous plait , il faut d'etre bien concentré dans ce case là;
-    `)
-    console.log(" ")
-    let annule = true
-    let supp = false
-    let candidatPourSuprimer = prompt("    Entrer CIN du candidat souhaité pour le supprimer : ")
-    for (let q = 0; q < candidats.length ; q++ ){
-        if (candidatPourSuprimer === candidats[q].cin){
-            supp = true
-            let verifierDeSupprimer = parseInt(prompt("     étez-vous sùr ?  (1- Oui / 2- Non)  :  "))
-            if (verifierDeSupprimer == 1){
-                candidats[q] = undefined
-                console.log("  Candidat a été supprimé avec succès .")
-                annule = false
-            }else{
-                console.log("  la suppression a été annulé .")
-                break;
-            }
-        }
-    }
+// function supprimerCandidat() {
+//   for(let o = 1; o<= 1; o++){
+//     console.log(`
+//         ==================================================
+//                    SUPPRIMER DES CANDIDATS
+//     `)
+//     console.log(`
+//    s'il vous plait , il faut d'etre bien concentré dans ce case là;
+//     `)
+//     console.log(" ")
+//     let annule = true
+//     let supp = false
+//     let candidatPourSuprimer = prompt("    Entrer CIN du candidat souhaité pour le supprimer : ")
+//     for (let q = 0; q < candidats.length ; q++ ){
+//         if (candidatPourSuprimer === candidats[q].cin){
+//             supp = true
+//             let verifierDeSupprimer = parseInt(prompt("     étez-vous sùr ?  (1- Oui / 2- Non)  :  "))
+//             if (verifierDeSupprimer == 1){
+//                 candidats[q] = undefined
+//                 console.log("  Candidat a été supprimé avec succès .")
+//                 annule = false
+//             }else{
+//                 console.log("  la suppression a été annulé .")
+//                 break;
+//             }
+//         }
+//     }
 
-    if (supp === false){
-        console.log("  Ce Candidat n'existe pas .")
-        break;
-    }
-    if (annule === true){
+//     if (supp === false){
+//         console.log("  Ce Candidat n'existe pas .")
+//         break;
+//     }
+//     if (annule === true){
           
+//     }
+// }
+// }
+
+
+function supprimer(tab, i) {
+
+    for (i ; i < tab.length; i++) {
+      tab[i] = tab[i + 1]
     }
+    tab.length -= 1;
+    return(tab)
 }
-}
-supprimerCandidat()
-console.log(candidats)
+
+
+
+console.log(supprimer(candidats, 3))
+
+
