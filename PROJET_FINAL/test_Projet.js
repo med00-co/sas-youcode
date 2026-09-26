@@ -50,28 +50,106 @@ const candidats = [
         electeurs: ["JC754544", "JM456546"] 
     },
 ]
+// -------------------------------------------------------------------------------------
+for(let cana of candidats){
+    cana.nombresVotes = cana.electeurs.length
+    } 
+// -------------------------------------------------------------------------------------
+// function of affiche
+function afficheCandidat(){
+    console.log(`
+      ========================================================
+                     Afficher les candidats
 
-
-
-
-
-while(true){
-  let cinDeCandidatpourLeVoter = prompt("       Entrer CIN de candidat: ")
-  for(let i =0; i< candidats.length; i++){
-      var trouverCandidatVote = true
+`)
+    console.log(`
+          1 - Affichage simple 
+          2 - Tri par nombres de votes
+          3 - Filtrer par un parti politique spécifique 
+`)
+    //  switch starts     ssssssssssssssssssssssssssssssssssssssssss
+let afficheItsChoose = parseInt(prompt("Votre choix: "))
+switch (afficheItsChoose){
     
-          if (cinDeCandidatpourLeVoter == candidats[i].cin ){
-                  candidats[i].electeurs.push(cinDeCandidatpourLeVoter)
-                  console.log("votre vote a été effectuer avec succès .")
-  
-          }else{
-              trouverCandidatVote = false
-              continue
+    
+    case 1:
+        for (let candidat of candidats){
+            console.log(`
+                ----------------------------------------
+                CIN : ${candidat.cin}
+                Nom : ${candidat.nom}
+                Prénom: ${candidat.prenom}
+                Age : ${candidat.age}
+                Parti Politique: ${candidat.partiPolitique}
+            `)
+        }
+        break;
+
+
+    case 2:
+        for (let u = 0; u< candidats.length -1 ; u++){
+          for (let j = 0; j< candidats.length -1 -u ; j++){
+            if (candidats[j].nombresVotes < candidats[j+1].nombresVotes ){
+                let temp = candidats[j]
+                candidats[j]= candidats[j+1]
+                candidats[j+1]= temp
+            }
           }
-  }
-  if (trouverCandidatVote == false){
-      console.log("ni candidat trouvé avec ce CIN ;")
-  }else{
-      break
-  }
+        }
+        let ordreF = 1
+        for(let cad of candidats){
+          console.log(`
+          * ${ordreF}  ----------------------------------------
+                CIN : ${cad.cin}
+                Nom : ${cad.nom}
+                Prénom: ${cad.prenom}
+                Age : ${cad.age}
+                            - Nombres de votes: ${cad.nombresVotes}
+            `)
+            ordreF ++
+        }
+        break;
+
+
+    case 3 :
+        // ce code est pour affich les parties politiques qui sont existes
+        let politiqueExiste = []
+        for (canad of candidats){
+            for (pol of politiqueExiste){
+                if (pol != canad.partiPolitique){
+                    politiqueExiste.push(canad.partiPolitique)
+                }
+            }
+        }
+        console.log("Les parties politiques existes : ")
+        console.log("     ", politiqueExiste.join(" - "))
+        //----------------------------------------------------------------- 
+
+        const partiPolitiqueDemandePourFiltrer = prompt("Entrer Partie politique:  ").trim().toLowerCase()
+
+        let existOfPartiPol = false
+        for (let candit of candidats){
+            if (candit.partiPolitique.toLowerCase() == partiPolitiqueDemandePourFiltrer){
+              console.log("-    ", partiPolitiqueDemandePourFiltrer.toUpperCase())
+              console.log(`
+                ----------------------------------------
+                CIN : ${candit.cin}
+                Nom : ${candit.nom}
+                Prénom: ${candit.prenom}
+                Parti Politique: ${candit.partiPolitique}
+                Age : ${candit.age}
+              `)
+              existOfPartiPol = true
+        
+            }
+        }
+        if (existOfPartiPol === false){
+            console.log("           Désolé, La partie politique n'est pas trouvé. ")
+        }
+        break;
+    default:
+        console.log("              Choix invalide !!")
 }
+}
+
+afficheCandidat()

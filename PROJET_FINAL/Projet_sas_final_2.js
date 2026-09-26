@@ -66,7 +66,7 @@ function supprimerCandidat() {
                    SUPPRIMER DES CANDIDATS
     `)
     console.log(`
-     s'il vous plait , il faut d'etre bien concentré dans ce case là;
+   s'il vous plait , il faut d'etre bien concentré dans ce case là;
     `)
     console.log(" ")
     let annule = true
@@ -74,11 +74,11 @@ function supprimerCandidat() {
     let candidatPourSuprimer = prompt("    Entrer CIN du candidat souhaité pour le supprimer : ")
     for (let q = 0; q < candidats.length ; q++ ){
         if (candidatPourSuprimer === candidats[q].cin){
+            supp = true
             let verifierDeSupprimer = parseInt(prompt("     étez-vous sùr ?  (1- Oui / 2- Non)  :  "))
             if (verifierDeSupprimer == 1){
                 candidats[q] = undefined
                 console.log("  Candidat a été supprimé avec succès .")
-                supp = true
                 annule = false
             }else{
                 console.log("  la suppression a été annulé .")
@@ -86,13 +86,15 @@ function supprimerCandidat() {
             }
         }
     }
-    if (annule === true){
-        break;
-    }
+
     if (supp === false){
         console.log("  Ce Candidat n'existe pas .")
+        break;
     }
-  }
+    if (annule === true){
+          
+    }
+}
 }
 supprimerCandidat()
 console.log(candidats)
