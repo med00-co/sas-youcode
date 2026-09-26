@@ -55,55 +55,11 @@ for(let cana of candidats){
     cana.nombresVotes = cana.electeurs.length
     } 
 // -------------------------------------------------------------------------------------
-function supprimerCandidat() {
-    // function to delete ---------------
-    function supprimer(tab, i) {
-
-    for (i ; i < tab.length; i++) {
-      tab[i] = tab[i + 1]
-    }
-    tab.length -= 1;
-    return(tab)
-    }
-    // ----------------------------------
-
-
-  for(let o = 1; o<= 1; o++){
-    console.log(`
-        ==================================================
-                   SUPPRIMER DES CANDIDATS
-    `)
-    console.log(`
-   s'il vous plait , il faut d'etre bien concentré dans ce case là;
-    `)
-    console.log(" ")
-    let annule = true
-    let supp = false
-    let candidatPourSuprimer = prompt("    Entrer CIN du candidat souhaité pour le supprimer : ")
-    for (let q = 0; q < candidats.length ; q++ ){
-        if (candidatPourSuprimer === candidats[q].cin){
-            supp = true
-            let verifierDeSupprimer = parseInt(prompt("     étez-vous sùr ?  (1- Oui / 2- Non)  :  "))
-            if (verifierDeSupprimer == 1){
-                supprimer(candidats, q)
-                console.log("  Candidat a été supprimé avec succès .")
-                annule = false
-            }else{
-                console.log("  la suppression a été annulé .")
-                break;
-            }
-        }
-    }
-
-    if (supp === false){
-        console.log("  Ce Candidat n'existe pas .")
-        break;
-    }
-    if (annule === true){
-          
-    }
+while(true){
+candidatPourAjouté.nom = prompt("   Nom : ")
+if(candidatPourAjouté.nom !== ""){
+    break
+}else{
+    console.log("Error ; il est interdit de laisser le nom vide. ")
 }
 }
-
-supprimerCandidat()
-console.log(candidats)

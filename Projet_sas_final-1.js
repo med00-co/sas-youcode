@@ -371,7 +371,6 @@ function modifierInformationCandidat(){
     }
 }
 
-modifierInformationCandidat()
 // --------------------------------------------------------------- Modifier function end ------------------------------------------------
 // supprimer function --------------------------------------------------------------------------------------------------------------------
 function supprimerCandidat() {
@@ -423,7 +422,7 @@ function supprimerCandidat() {
     }
 }
 }
-// ----------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------------------------------
 // Rechercher function ---------------------------------------------------------------------------------------
 function rechercherCandidat(){
     console.log(`
@@ -436,7 +435,7 @@ function rechercherCandidat(){
            la case de recherche .
     `)
 
-    let candidatNomRecherché = prompt("   Recherche ( Nom de candidat ) : ").trim().toLowerCase()
+    let candidatNomRecherché = prompt("  |->  Recherche ( Nom de candidat ) : ").trim().toLowerCase()
     let chercheTrouve = false
     for(let candud of candidats){
         if (candidatNomRecherché === candud.nom.toLowerCase()){
@@ -548,11 +547,10 @@ console.log(`
            0- Quitter     
 `)
 console.log("        =================================================")
-var choose = parseInt(prompt("Votre séléction : "))
 }
 front()
 // ;;;;;;;;;;;;;;;;;;; Require Functions ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+let choose = parseInt(prompt("Votre séléction : "))
 switch(choose){ 
     case 1: 
        afficheCandidat()
